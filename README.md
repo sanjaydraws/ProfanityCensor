@@ -1,26 +1,67 @@
-This is a Kotlin Multiplatform project targeting Android, iOS, Web, Desktop, Server.
+# Profanity Filter API
 
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
+**Profanity Filter API** is a simple HTTP API built using Ktor that allows you to filter and censor profane words from input text. It utilizes a customizable list of profane words, and the response includes the original text, the censored version, and a flag indicating whether any profanity was detected.
 
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+## Features
 
-* `/server` is for the Ktor server application.
+- Censors profane words in the input text.
+- Returns the original text, the censored text, and a profanity detection flag.
+- Easy integration with other applications.
+- Supports JSON input and output.
+- Requires an API key for secure access.
 
-* `/shared` is for the code that will be shared between all targets in the project.
-  The most important subfolder is `commonMain`. If preferred, you can add code to the platform-specific folders here too.
+### Installation
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/yourusername/ProfanityFilter.git
+    cd ProfanityFilter
+    ```
+
+2. Build the project using Gradle:
+    ```bash
+    ./gradlew build
+    ```
+
+3. Run the application:
+    ```bash
+    ./gradlew run
+    ```
+
+4. The server will start on `http://localhost:8080`.
+
+## API Usage
+
+### Endpoint
+
+`POST /profanityfilter`
+
+### Request
+
+You need to send a JSON payload containing the text to be filtered. The API key must be included in the request headers.
+
+#### Request Headers
+
+- `X-Api-Key`: Your unique API key.
+
+#### Request Body
+
+The request body should be a JSON object containing the text you want to filter.
+
+**Example Request Body:**
+```json
+{
+   "text": "Why the hell would you do that?"
+}
+```
+
+### Example Response
+```json
+{
+   "original": "Why the hell would you do that?",
+   "censored": "Why the **** would you do that?",
+   "has_profanity": true
+}
+```
 
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html),
-[Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/#compose-multiplatform),
-[Kotlin/Wasm](https://kotl.in/wasm/)…
-
-We would appreciate your feedback on Compose/Web and Kotlin/Wasm in the public Slack channel [#compose-web](https://slack-chats.kotlinlang.org/c/compose-web).
-If you face any issues, please report them on [GitHub](https://github.com/JetBrains/compose-multiplatform/issues).
-
-You can open the web application by running the `:composeApp:wasmJsBrowserDevelopmentRun` Gradle task.
