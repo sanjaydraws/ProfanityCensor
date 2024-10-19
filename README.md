@@ -1,6 +1,6 @@
 # Profanity Filter API
 
-**Profanity Filter API** is a simple HTTP API built using Ktor that allows you to filter and censor profane words from input text. It utilizes a customizable list of profane words, and the response includes the original text, the censored version, and a flag indicating whether any profanity was detected.
+**Profanity Filter API** is a simple HTTP API built using **Ktor** that allows you to filter and censor profane words from input text. It utilizes a customizable list of profane words, and the response includes the original text, the censored version, and a flag indicating whether any profanity was detected.
 
 ## Features
 
