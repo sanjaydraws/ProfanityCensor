@@ -22,7 +22,10 @@ data class ProfanityRequest(val text: String)
 // Response structure
 
 const val SERVER_PORT = 8080
-val API_KEY: String = UUID.randomUUID().toString()
+//val API_KEY: String = UUID.randomUUID().toString()
+
+const val API_KEY: String = "1febc51b-1493-49f6-a85b-15f684269321"
+
 
 fun main() {
     println("API Key: $API_KEY") // Print the API key to the console for testing purposes

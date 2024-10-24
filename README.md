@@ -42,7 +42,7 @@ You need to send a JSON payload containing the text to be filtered. The API key 
 
 #### Request Headers
 
-- `X-Api-Key`: Your unique API key.
+- `X-Api-Key`: 1febc51b-1493-49f6-a85b-15f684269321.
 
 #### Request Body
 
