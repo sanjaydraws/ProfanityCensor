@@ -4,8 +4,6 @@
 
 ## Features
 
-## Features
-
 - Censors profane words in the input text.
 - Returns the original text, the censored text, and a profanity detection flag.
 - Provides statistics on the number of profane words detected, including counts for each specific word.
