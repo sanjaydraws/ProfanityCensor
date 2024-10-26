@@ -51,8 +51,8 @@ You need to send a JSON payload containing the text to be filtered. The API key 
 
 The request body should be a JSON object containing the following parameters:
 
-- `text` (string, required): The text that you want to filter for profane words.
-- `replacement` (string, optional): The character(s) to use for censoring profane words. Defaults to `*` if not provided.
+- **`text`** (string, required): The text that you want to filter for profane words.
+- **`replacement`** (string, optional): The character(s) to use for censoring profane words. Defaults to `*` if not provided.
 
 **Example Request Body:**
 ```json
@@ -65,12 +65,12 @@ The request body should be a JSON object containing the following parameters:
 ### Example Response
 The response will be a JSON object containing the following fields:
 
-- `original` (string) : The original input text.
-- `censored` (string) : The censored version of the text with profane words replaced.
-- `has_profanity` (boolean) : A flag indicating whether any profanity was detected.
-- `statistics` (object): An optional field that provides statistics about the profanity detected.
-- `totalProfaneWords` (integer): The total number of profane words found in the text.
-- `profaneWordCounts` (object): A map of profane words and their counts.
+- **`original`** (string) : The original input text.
+- **`censored`** (string) : The censored version of the text with profane words replaced.
+- **`has_profanity`** (boolean) : A flag indicating whether any profanity was detected.
+- **`statistics`** (object): An optional field that provides statistics about the profanity detected.
+- **`totalProfaneWords`** (integer): The total number of profane words found in the text.
+- **`profaneWordCounts`** (object): A map of profane words and their counts.
 
 ```json
 {
