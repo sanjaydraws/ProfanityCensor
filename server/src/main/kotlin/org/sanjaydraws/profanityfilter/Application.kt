@@ -41,7 +41,7 @@ fun Application.module() {
     }
 
     routing {
-        route("/profanityfilter") {
+        route("/profanitycensor") {
             post {
                 val apiKey = call.request.headers["X-Api-Key"]
                 if (apiKey == null || apiKey != API_KEY) {

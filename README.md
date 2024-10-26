@@ -16,28 +16,15 @@
 ### Installation
 
 1. Clone the repository:
-    ```bash
-    git clone https://github.com/yourusername/ProfanityFilter.git
-    cd ProfanityFilter
-    ```
-
 2. Build the project using Gradle:
-    ```bash
-    ./gradlew build
-    ```
-
 3. Run the application:
-    ```bash
-    ./gradlew run
-    ```
-
 4. The server will start on `http://localhost:8080`.
 
 ## API Usage
 
 ### Endpoint
 
-`POST /profanityfilter`
+**`POST /profanitycensor`**
 
 ### Request
 
@@ -45,7 +32,7 @@ You need to send a JSON payload containing the text to be filtered. The API key 
 
 #### Request Headers
 
-- `X-Api-Key`: 1febc51b-1493-49f6-a85b-15f684269321.
+- **`X-Api-Key`**: 1febc51b-1493-49f6-a85b-15f684269321.
 
 #### Request Body
 
