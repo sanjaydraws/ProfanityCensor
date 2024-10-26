@@ -11,13 +11,11 @@ import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.request.receive
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import java.io.File
 import java.io.FileNotFoundException
 import java.io.InputStream
-import java.util.UUID
 
 // Data class to handle the request input
-data class ProfanityRequest(val text: String)
+data class ProfanityRequest(val text: String, val replacement:String? = "*")
 
 // Response structure
 
@@ -54,9 +52,10 @@ fun Application.module() {
                 // Deserialize the JSON into the ProfanityRequest data class
                 val request = call.receive<ProfanityRequest>()
 
+
                 // Load profane words and process the text field
                 val profaneWords = loadProfaneWords()
-                val response = censorText(request.text, profaneWords)
+                val response = censorText(request.text, profaneWords, request.replacement)
 
                 // Respond with the censored text and status
                 call.respond(response)
@@ -74,20 +73,28 @@ fun loadProfaneWords(): List<String> {
     return Gson().fromJson(wordsJson, type)
 }
 
-fun censorText(text: String, profaneWords: List<String>): ProfanityResponse {
+fun censorText(text: String, profaneWords: List<String>, replacement: String?): ProfanityResponse {
     var censoredText = text
     var hasProfanity = false
+    var totalProfaneWords = 0
+    val profaneWordCounts = mutableMapOf<String, Int>()
+    val effectiveReplacement = replacement ?: "*" // Default to "*" if null
 
     profaneWords.forEach { word ->
-        if (text.contains(word, ignoreCase = true)) {
-            censoredText = censoredText.replace(word, "*".repeat(word.length), ignoreCase = true)
+        val count = Regex("\\b${Regex.escape(word)}\\b", RegexOption.IGNORE_CASE).findAll(text).count()
+
+        if(count>0){
+            censoredText = censoredText.replace(word, effectiveReplacement.repeat(word.length), ignoreCase = true)
             hasProfanity = true
+            totalProfaneWords += count
+            profaneWordCounts[word] = count
         }
     }
 
     return ProfanityResponse(
-        original = text,    // The original input text
-        censored = censoredText,  // Censored version
-        has_profanity = hasProfanity  // Whether profanity was found
+        original = text,
+        censored = censoredText,
+        hasProfanity = hasProfanity,
+        statistics = ProfanityStatistics(totalProfaneWords, profaneWordCounts)
     )
 }
