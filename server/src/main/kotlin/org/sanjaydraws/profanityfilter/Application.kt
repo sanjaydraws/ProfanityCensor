@@ -28,7 +28,7 @@ const val API_KEY: String = "1febc51b-1493-49f6-a85b-15f684269321"
 fun main() {
     println("API Key: $API_KEY") // Print the API key to the console for testing purposes
 
-    embeddedServer(Netty, port = SERVER_PORT, host = "0.0.0.0", module = Application::module)
+    embeddedServer(Netty, port = SERVER_PORT, host = "192.168.40.143", module = Application::module)
         .start(wait = true)
 }
 
